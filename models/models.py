@@ -7,7 +7,7 @@ class Playlist(db.Model):
     title = db.Column(db.String(120), unique=True, nullable=False)
     
     def __repr__(self):
-        return '<Playlist %r>' % self.name
+        return '<Playlist %r>' % self.title
 
 class PlaylistItem(db.Model):
     id = db.Column(db.Integer, primary_key=True)
