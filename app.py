@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 from models.models import db, Playlist, PlaylistItem
 
 app = Flask(__name__)
@@ -9,19 +9,22 @@ db.init_app(app)
 db.create_all(app=app)
 
 @app.route("/")
-def hello_world():
-    return "<p>Hello, World!</p>"
+def test():
+    playlists = Playlist.query.all()
+    tracks = PlaylistItem.query.all()
 
-@app.route("/days")
-def getDays():
-    items = Playlist.query.all()
-    days = []
+    playlistViewModelArray = []
     
-    for i in items:
-        days.append(i.title)
-    
-    return str(days)
+    # Eventualy can join on query w/ sql but this works for now
+    for playlist in playlists:
+        tracksInCurrentPlaylist = []
+        for track in tracks:
+            if(track.playlist_id == playlist.id):
+                tracksInCurrentPlaylist.append(track)             
 
-
+        playlistViewModelArray.append({"playlist": playlist, "tracks": tracksInCurrentPlaylist})
+        
+    return render_template('home.html',playlistViewModelArray=playlistViewModelArray)
 
 app.run()
+

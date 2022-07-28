@@ -1,0 +1,28 @@
+.playlist-container {
+    display:flex;
+    flex-direction:row;
+    height: 100vh;
+}
+
+.playlist {
+    border-style: dashed;
+    border-color: blue;
+    border-width: 0.25rem;
+    background-color: rgb(253, 255, 127);
+    flex-grow: 1;
+    height: 100%;
+}
+
+.playlist-title {
+    text-align: center;
+}
+
+.playlist-track {
+    margin-left: 2rem;
+    margin-right: 2rem;
+}
+
+.vote-box {
+    background-color: coral;
+    padding-bottom: 5px;
+}
